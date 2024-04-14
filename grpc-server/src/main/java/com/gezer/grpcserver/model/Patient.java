@@ -3,8 +3,8 @@ package com.gezer.grpcserver.model;
 import com.gezer.lib.Gender;
 import com.gezer.lib.PatientMessage;
 import jakarta.persistence.*;
+import jakarta.persistence.criteria.CriteriaBuilder;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,7 +12,7 @@ import java.util.Set;
 public class Patient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     private String name;
 
@@ -46,11 +46,11 @@ public class Patient {
     // Getters and setters
 
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

@@ -2,6 +2,8 @@ package com.gezer.grpcserver.model;
 import com.gezer.lib.HospitalMessage;
 import com.gezer.lib.PatientMessage;
 import jakarta.persistence.*;
+
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -10,7 +12,7 @@ public class Hospital {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     private String name;
 
@@ -19,17 +21,18 @@ public class Hospital {
 
     public Hospital(String name) {
         this.name = name;
+        patients = new HashSet<>();
     }
 
     public Hospital() {
 
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long hospital_id) {
+    public void setId(Integer hospital_id) {
         this.id = hospital_id;
     }
 

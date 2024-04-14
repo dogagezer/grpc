@@ -270,4 +270,3 @@ public class HospitalServiceImpl extends HospitalServiceGrpc.HospitalServiceImpl
         }
     }
 }
-
