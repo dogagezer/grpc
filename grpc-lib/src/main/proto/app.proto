@@ -1,0 +1,178 @@
+syntax = "proto3";
+
+package com.gezer.lib;
+
+option java_multiple_files = true;
+option java_package = "com.gezer.lib";
+option java_outer_classname = "AppProto";
+
+// Hospital service definition.
+service HospitalService {
+  // Create a new Hospital
+  rpc CreateHospital(CreateHospitalRequest) returns (CreateHospitalResponse);
+
+  // Update an existing Hospital
+  rpc ModifyHospital(ModifyHospitalRequest) returns (ModifyHospitalResponse);
+
+  // Delete a Hospital by ID
+  rpc DeleteHospital(DeleteHospitalRequest) returns (DeleteHospitalResponse);
+
+  // Create a new patient
+  rpc CreatePatient(CreatePatientRequest) returns (CreatePatientResponse);
+
+  // Update an existing patient
+  rpc ModifyPatient(ModifyPatientRequest) returns (ModifyPatientResponse);
+
+  // Delete a patient by ID
+  rpc DeletePatient(DeletePatientRequest) returns (DeletePatientResponse);
+
+  // Register a patient in a hospital
+  rpc RegisterPatient(RegisterPatientRequest) returns (RegisterPatientResponse);
+
+  // Unregister a patient in a hospital
+  rpc UnregisterPatient(RegisterPatientRequest) returns (UnregisterPatientResponse);
+
+  // List all patients of a hospital
+  rpc ListPatients(ListPatientsRequest) returns (ListPatientsResponse);
+
+  // List all hospitals in which a patient has been registered
+  rpc ListHospitals(ListHospitalsRequest) returns (ListHospitalsResponse);
+}
+
+// This enum represents the patient gender.
+enum Gender {
+  MALE = 0;
+  FEMALE = 1;
+  OTHER = 2;
+}
+
+// Request message contains hospital information.
+message CreateHospitalRequest {
+  string name = 1;
+}
+
+//This response message indicates if the AddHospitalRequest was successful.
+message CreateHospitalResponse {
+  uint32 hospital_id = 2;
+  string message = 1;
+
+}
+
+// Request message for modifying a hospital.
+message ModifyHospitalRequest {
+  uint32 hospital_id = 1;
+  string name = 2;
+}
+
+// Response message for modifying a hospital.
+message ModifyHospitalResponse {
+  string message = 1;
+}
+
+// Request message for deleting a hospital.
+message DeleteHospitalRequest {
+  uint32 hospital_id = 1;
+}
+
+// Response message for deleting a hospital.
+message DeleteHospitalResponse {
+  string message = 1;
+}
+
+// Request message for creating a patient.
+message CreatePatientRequest {
+  string name = 1;
+  uint32 age = 2;
+  Gender gender = 3;
+  uint64 social_security_number = 4;
+}
+
+// Response message for creating a patient.
+message CreatePatientResponse {
+  uint32 patient_id = 2;
+  string message = 1;
+
+}
+
+
+// Request message for modifying a patient.
+message ModifyPatientRequest {
+  uint32 patient_id = 1;
+  string name = 2;
+  uint32 age = 3;
+  Gender gender = 4;
+  uint64 social_security_number = 5;
+}
+
+// Response message for modifying a patient.
+message ModifyPatientResponse {
+  string message = 1;
+}
+
+// Request message for deleting a patient.
+message DeletePatientRequest {
+  uint32 patient_id = 1;
+}
+
+// Response message for deleting a patient.
+message DeletePatientResponse {
+  string message = 1;
+}
+
+// Request message for registering a patient in a hospital.
+message RegisterPatientRequest {
+  uint32 hospital_id = 1;
+  uint32 patient_id = 2;
+}
+
+// Response message for registering a patient in a hospital.
+message RegisterPatientResponse {
+  string message = 1;
+}
+
+
+// Request message for unregistering a patient in a hospital.
+message UnregisterPatientRequest {
+  uint32 hospital_id = 1;
+  uint32 patient_id = 2;
+}
+
+// Response message for unregistering a patient in a hospital.
+message UnregisterPatientResponse {
+  string message = 1;
+}
+
+// Define the message for a hospital.
+message HospitalMessage {
+  uint32 hospital_id = 1;
+  string name = 2;
+}
+
+// Define the message for a patient.
+message PatientMessage {
+  uint32 patient_id = 1;
+  string name = 2;
+  uint32 age = 3;
+  Gender gender = 4;
+  uint64 social_security_number = 5;
+}
+
+// Request message for listing all patients of a hospital.
+message ListPatientsRequest {
+  uint32 hospital_id = 1;
+}
+
+// Response message for listing all patients of a hospital.
+message ListPatientsResponse {
+  repeated PatientMessage patients = 1;
+}
+
+// Request message for listing all hospitals in which a patient has been registered.
+message ListHospitalsRequest {
+  uint32 patient_id = 1;
+}
+
+// Response message for listing all hospitals in which a patient has been registered.
+message ListHospitalsResponse {
+  repeated HospitalMessage hospitals = 1;
+}
